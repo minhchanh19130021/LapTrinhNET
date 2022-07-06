@@ -1,0 +1,56 @@
+﻿
+@{
+    Page.Title = "Page Title from CS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+@model WatchStore.Models.Contact
+<div class="container-fluid bg-light breadcrumb-section">
+    <div class="container pt-2">
+        <div aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container pt-5 pb-5">
+    <div class="row gy-5">
+        <div class="col-lg-6 col-md-12 pt-3">
+            <h5 class="title text-uppercase">TELL US YOUR PROJECT</h5>
+            @if (ViewBag.successful != null)
+            {
+                <p class="alert alert-success" style="max-width: 550px">@ViewBag.Successful</p>
+            }
+            @using (Html.BeginForm("Create", "Contact", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="d-flex flex-column contact-form">
+                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Enter full name or username", required = "true" ,@class ="mt-3"})
+
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter email", type = "email", required = "true", @class = "mt-3" })
+
+                    @Html.TextAreaFor(m => m.Message, new { placeholder = "Enter message", rows = "5", required = "true", @class = "mt-3" })
+
+                </div>
+                <button class="btn btn-send mt-3" type="submit">
+                    Send
+                </button>
+            }
+
+        </div>
+        <div class="col-lg-6 col-md-12 contact-info bg-light">
+            <h5 class="title text-uppercase">CONTACT US</h5>
+            <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dollorem ipsum dolor sit amet, consectetur adip lorem ipsum dolorlorem ipsum dolor sit amet, consectetur adip lorem ipsum dolorlorem ipsum dolor sit amet, consectetur adip lorem ipsum dolorlorem ipsum dolor sit amet, consectetur adip lorem ipsum doloror</p>
+            <p class="title"><i class="fa-solid fa-location-dot"></i> <span class="px-3">No 40 Baria Sreet 133/2 NewYork City</span></p>
+            <p class="title"><i class="fa-solid fa-envelope"></i> <span class="px-3">minhchanh@gmail.com</span></p>
+            <p class="title"><i class="fa-solid fa-phone"></i> <span class="px-3">0(1234) 567 890</span></h5>
+            <p class="title"><i class="fa-solid fa-clock"></i> <span class="px-3">08AM – 22PM</span></p>
+
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "Brand";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model PagedList.IPagedList<WatchStore.Models.Product>
+@using PagedList.Mvc;
+<div class="container-fluid bg-light breadcrumb-section">
+    <div class="container pt-2">
+        <div aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Product</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<div class="container pt-3 pb-3">
+    <div class="row gy-5">
+        <div class="col-lg-2 border rounded-1 h-100">
+            <div class="filter-price ">
+                <h5 class="title">Filter Price</h5>
+                <p>
+                    <a href="~/Product/Price?priceFrom=0&priceTo=200">Under $200</a>
+                </p>
+                <p>
+                    <a href="~/Product/Price?priceFrom=200&priceTo=300">From $200 to $300</a>
+                </p>
+                <p>
+                    <a href="~/Product/Price?priceFrom=300&priceTo=400">From $300 to $400</a>
+                </p>
+                <p>
+                    <a href="~/Product/Price?priceFrom=500&priceTo=10000">Over $500</a>
+                </p>
+            </div>
+            <div class="filter-wateroof ">
+                <h5 class="title">Filter Wateroof</h5>
+                <p>
+                    <a href="~/Product/Waterproof?waterproof=3ATM">Wateroof 3ATM</a>
+                </p>
+                <p>
+                    <a href="~/Product/Waterproof?waterproof=5ATM">Wateroof 5ATM</a>
+                </p>
+                <p>
+                    <a href="~/Product/Waterproof?waterproof=50M">Wateroof 50M</a>
+                </p>
+                <p>
+                    <a href="~/Product/Waterproof?waterproof=100M">Wateroof 100M</a>
+                </p>
+                <p>
+                    <a href="~/Product/Waterproof?waterproof=200M">Wateroof 200M</a>
+                </p>
+            </div>
+            <div class="filter-origin ">
+                <h5 class="title">Filter Wateroof</h5>
+                <p>
+                    <a href="~/Product/Origin?origin=Singapore">Singapore</a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=England">England</a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=Australia">Australia</a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=Korea">Korea</a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=England">Switzerland</a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=Russia">Russia </a>
+                </p>
+                <p>
+                    <a href="~/Product/Origin?origin=Japan">Japan </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-10 ">
+            <div class="row gy-5">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                        <div class="p-3 border rounded-3 ">
+                            <div class="card-product position-relative ">
+                                <img src="~/Content/img/product/@item.Avatar"
+                                     class="img-thumbnail border-0 h-250"
+                                     alt="">
+                                <a href="~/Product/Detail?pid=@item.Id"><h5 class="card-product__name text-center">@item.Name</h5></a>
+                                <div class="d-flex justify-content-center">
+                                    <p class="card-product__new">$42.00</p>
+                                    <p class="card-product__old text-decoration-line-through">$@item.Price</p>
+                                </div>
+                                <div class="card-label">
+                                    <h5 class="card-label__discount position-absolute">@item.Discount%</h5>
+                                </div>
+                                <div class="card-btn position-absolute">
+                                    <button class="card-btn__cart">
+                                        <i class="fa-solid fa-cart-arrow-down"></i>
+                                    </button>
+                                    <button class="card-btn__search">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mx-auto p-1 text-center" ">
+    @for (int i = 0; i < 1; i++)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Brand", "Product", new { bid = Model.First().Brand, page = page }))
+    }
+</div>
+
